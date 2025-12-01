@@ -1,0 +1,22 @@
+{
+    "sensors": [
+        {
+            "id": "temp01",
+            "name": "Temperature Sensor",
+            "type": "Analog",
+            "warn_low": 10.0,
+            "warn_high": 30.0,
+            "alarm_low": 5.0,
+            "alarm_high": 40.0
+        },
+        {
+            "id": "door01",
+            "name": "Door Sensor",
+            "type": "Digital",
+            "warn_low": 0.0,
+            "warn_high": 1.0,
+            "alarm_low": 0.0,
+            "alarm_high": 1.0
+        }
+    ]
+}

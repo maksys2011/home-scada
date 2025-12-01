@@ -1,8 +1,29 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.16)
 
-project(HomeScada VERSION 1.0.0 LANGUAGES CXX)
+project(HomeScada VERSION 0.1.0 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDART 17)
-set(CMAKE_CXX_STANDART_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_subdirectory(app)
+include_directories(include)
+
+# Находим библиотеку
+find_package(nlohmann_json REQUIRED)
+
+# Исполняемый файл
+add_executable(home-scada
+    app/main.cpp
+)
+
+# Добавляем cpp-файлы из src/
+file(GLOB SRC_FILES src/*.cpp)
+target_sources(home-scada PRIVATE ${SRC_FILES})
+
+# Линкуем JSON-библиотеку
+target_link_libraries(home-scada PRIVATE
+    nlohmann_json::nlohmann_json
+)
+# Устанавливаем исполняемый файл
+
+
+
