@@ -1,28 +1,61 @@
-#include <Enum.h>
+#include <Enum.hpp>
 
-Type ParseType(const std::string &typeStr)
+SensorType ParseSensorType(const std::string &typeStr)
 {
     if (typeStr == "Analog")
-        return Type::Analog;
+        return SensorType::Analog;
     else if (typeStr == "Digital")
-        return Type::Digital;
+        return SensorType::Digital;
     else if (typeStr == "Counter")
-        return Type::Counter;
+        return SensorType::Counter;
     else
         throw   ("Invalid type string: " + typeStr);
 }
 
-std::string TypeToString(Type type)
+std::string SensorTypeToString(const SensorType type)
 {
     switch (type)
     {
-        case Type::Analog:
+        case SensorType::Analog:
             return "Analog";
-        case Type::Digital:
+        case SensorType::Digital:
             return "Digital";
-        case Type::Counter:
+        case SensorType::Counter:
             return "Counter";
         default:
             return "Unknown";
     }
 }
+
+ActuatorType ParseActuatorType(const std::string &typeStr)
+{
+    if (typeStr == "Relay")
+        return ActuatorType::Relay;
+    else if (typeStr == "PWM")
+        return ActuatorType::PWM;
+    else if (typeStr == "DigitalOut")
+        return ActuatorType::DigitalOut;
+    else if (typeStr == "AnalogOut")
+        return ActuatorType::AnalogOut;
+    else
+    return ActuatorType();
+}
+
+std::string ActuatorTypeToString(ActuatorType type)
+{
+    switch (type)
+    {
+        case ActuatorType::Relay:
+            return "Relay";
+        case ActuatorType::PWM:
+            return "PWM";
+        case ActuatorType::DigitalOut:
+            return "DigitalOut";
+        case ActuatorType::AnalogOut:
+            return "AnalogOut";
+        default:
+            return "Unknown";
+    }
+    return std::string();
+}
+

@@ -1,0 +1,33 @@
+#pragma once
+#include "ActuatorConfig.hpp"
+#include <string>
+#include <iostream>
+
+class Actuator
+{
+public:
+    
+    explicit Actuator (const ActuatorConfig& config);
+
+    //Управление
+
+    void turnOn();
+    void turnOff();
+    void setValue(double value);
+
+    //Получение статуса
+
+    bool getStatus() const;
+    double getValue() const;
+    const ActuatorConfig& config() const;
+
+    //Отладка
+    void print() const;
+
+private:
+
+    ActuatorConfig config_;
+    bool state_ = false;
+    double currentValue_ = 0.0;
+
+};

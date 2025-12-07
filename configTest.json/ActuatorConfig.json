@@ -1,0 +1,7 @@
+{
+        "id" : "motor01",
+        "name" : "Main Motor",
+        "type" : "AnalogOut",
+        "minValue" : 0.0,
+        "maxValue" : 100.0
+}

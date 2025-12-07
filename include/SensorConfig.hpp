@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <Enum.h>
+#include <Enum.hpp>
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
@@ -10,7 +10,7 @@ class SensorConfig
         
         std::string id_;
         std::string name_;
-        Type type_;
+        SensorType type_;
         double warnHigh_ = 0.0;
         double warnLow_ = 0.0;
         double alarmHigh_ = 0.0;
@@ -22,7 +22,7 @@ class SensorConfig
 
         SensorConfig(const std::string &id_,
                          const std::string &name_,
-                         Type type_,
+                         SensorType type_,
                          double warnHigh,
                          double warnLow,
                          double alarmHigh,
@@ -36,7 +36,7 @@ class SensorConfig
 
         const std::string &getName() const { return name_; };
 
-        Type getType() const { return type_; };
+        SensorType getType() const { return type_; };
 
         double getWarnHigh() const { return warnHigh_; };
 
