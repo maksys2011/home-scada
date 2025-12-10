@@ -2,9 +2,9 @@
     "id_": "temp01",
     "name_": "Temperature Sensor",
     "type_": "Analog",
-    "warnHigh_": 30.0,
+    "warnHigh_": 80.0,
     "warnLow_": 10.0,
-    "alarmHigh_": 40.0,
-    "alarmLow_": 5.0 
+    "alarmHigh_": 99.0,
+    "alarmLow_": 1.0
 }
 

@@ -6,18 +6,15 @@
 SensorState::SensorState(const SensorConfig &config)
     : config_(config)
 {}
-
 void SensorState::processValue(double raw)
 {
     lastValue_ = raw;
     currentState = classify(raw);
 }
-
 State SensorState::status() const
 {
     return currentState;
 }
-
 std::optional<double> SensorState::lastValue() const
 {
     return lastValue_;

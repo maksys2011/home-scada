@@ -47,8 +47,11 @@ bool SensorConfig::validate() const
 
 bool SensorConfig::validateValue(double v) const
 {
-    if (!validate()) return false;
-    return  v <= alarmLow_ && v <= alarmHigh_;
+    if (!validate()) {
+        std::cout << "validate - false" << std::endl;
+        return false;
+    }
+    return  v >= alarmLow_ && v <= alarmHigh_;
 }
 
 void SensorConfig::print() const

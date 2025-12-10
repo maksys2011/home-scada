@@ -5,10 +5,10 @@
 #include "SensorConfig.hpp"
 #include "ActuatorConfig.hpp"
 #include "Actuator.hpp"
+#include "Sensor.hpp"
 using json = nlohmann::json;
 
-int main()
-{
+int main() {
     const std::string file = "../configTest.json/SensorConfig.json";
     SensorConfig s;
     s.fromJson(file);
@@ -25,11 +25,14 @@ int main()
     const Actuator motor(a);
     motor.print();
 
-    std::cout << "TEST 5" << std::endl;
+    std::cout << std::endl;
 
-    
-    
+    Sensor sensor(s);
+    sensor.updateValue(55);
+    sensor.print();
 
+
+    std::cout << "TEST 7" << std::endl;
 
 
     return 0;
