@@ -15,7 +15,8 @@ int main() {
     const std::string path = "/home/maksys2011/home-scada/configTest.json/Test_sensor.json";
     SensorConfig cfg;
     cfg.fromJson(path);
-    Logger log;
+    Logger log("../logs/events.log");
+    std::cout << "100" << std::endl;
     SensorState state(cfg, &log);
     std::vector<double>val = {
     25, 26, 27,        // OK
