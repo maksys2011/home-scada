@@ -9,14 +9,25 @@
 #include "RandomSource.hpp"
 #include "Logger.hpp"
 #include "SensorManager.hpp"
+#include "SmoothRandomSource.hpp"
 using json = nlohmann::json;
 
 int main() {
 
     Logger log("../logs/events.log");
+    SensorConfig cfg;
+    const std::string filePath("/home/maksys2011/home-scada/configTest.json/SensorConfig.json");
+    cfg.fromJson(filePath);
+    SensorState state(cfg, &log);
+    SmothRandomSource  sours(22.0,0.2,15,30);
     
-    log.logStateChange("s1", State::OK, State::WARN, 10.0);
-    log.logStateChange("s1", State::WARN, State::ALARM, 20.0);
-    log.logStateChange("s1", State::ALARM, State::OK, 5.0);
+
+    for(int i = 0; i < 100; i++){
+        state.processValue(sours.readValue());
+        std::cout << sours.readValue() << std::endl;
+    }
+
+
+
 
 }

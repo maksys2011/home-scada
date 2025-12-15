@@ -6,6 +6,7 @@ RandomSource::RandomSource(double minValue, double maxValue)
         gen_(std::random_device{}()),
         dist_(minValue, maxValue)
 {}
+
 double RandomSource::readValue()
 {
     return dist_(gen_);
