@@ -6,11 +6,12 @@
 
 class SensorConfig;
 class Logger;
+class Archive;
 
 class SensorState {
 public:
 
-    explicit SensorState(const SensorConfig& config, Logger* logger);
+    explicit SensorState(const SensorConfig& config, Logger* logger, Archive* arch);
 
     void processValue(double raw);
 
@@ -34,5 +35,6 @@ private:
     size_t debounceCounter;
     size_t debounceLimit;
     Logger* logger_;
+    Archive* arch_;
 
 };

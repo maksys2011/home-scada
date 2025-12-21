@@ -4,12 +4,13 @@
 #include  "Enum.hpp"
 
 class Logger;
+class Archive;
 
 class Sensor {
 
 public:
 
-    explicit  Sensor(const SensorConfig& config, Logger* logger);
+    explicit  Sensor(const SensorConfig& config, Logger* logger, Archive* arch);
 
     // Обновление значения (приходит от Source)
     void updateValue(double rawValue);

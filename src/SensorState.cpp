@@ -2,15 +2,17 @@
 #include  <SensorConfig.hpp>
 #include  <Enum.hpp>
 #include  <iostream>
-#include <Logger.hpp>
+#include  <Logger.hpp>
+#include  <Archive.hpp>
 
-SensorState::SensorState(const SensorConfig &config, Logger* logger)
+SensorState::SensorState(const SensorConfig &config, Logger* logger, Archive* arch)
     : config_(config),
         currentState(State::OK),
         pendingState(State::OK),
         debounceCounter(0),
         debounceLimit(1),
-        logger_(logger)
+        logger_(logger),
+        arch_(arch)
 {}
 void SensorState::processValue(double raw)
 {
@@ -25,6 +27,14 @@ void SensorState::processValue(double raw)
 
     if(newState == State::INVALID) return;
 
+    if(arch_){
+        arch_->appendArchive(
+            config_.getId(),
+            config_.getName(),
+            raw,
+            currentState
+        );
+    }
     // Как это работает (на примере температуры):
 
     /*Заданная температура (Уставка): Например, 25°C.
@@ -79,7 +89,6 @@ void SensorState::processValue(double raw)
             raw
         );
     }
-
 }
 State SensorState::status() const
 {

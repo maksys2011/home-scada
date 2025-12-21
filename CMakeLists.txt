@@ -22,6 +22,7 @@ add_executable(home-scada
     src/Enum.cpp
     src/Logger.cpp
     src/SensorManager.cpp
+    src/Archive.cpp
 )
 
 # Добавляем cpp-файлы из src/
