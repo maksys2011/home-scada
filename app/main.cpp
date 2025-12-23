@@ -13,25 +13,17 @@
 #include "Archive.hpp"
 #include "SensorManager.hpp"
 #include "SmoothRandomSource.hpp"
+#include "testSource.hpp"
+
 using json = nlohmann::json;
 
 int main() {
 
-    Logger log("../logs/events.log");
-    Archive arch("/home/maksys2011/home-scada/archive/archive.csv");
-    SensorConfig cfg;
-    const std::string filePath("/home/maksys2011/home-scada/configTest.json/SensorConfig.json");
-    cfg.fromJson(filePath);
-    SensorState state(cfg, &log, &arch);
-    SmothRandomSource source(22.0,0.2,15,30);
+    std::vector<double> values_ = {50, 55, 60};
 
+    testSource sr(values_);
 
-    for(int i = 0; i < 50; i++){
-        state.processValue(source.readValue());
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    }
-
-    std::cout << "test 11 " << std::endl;
+    std::cout << "test 113" << std::endl;
 
 
 

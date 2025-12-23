@@ -5,8 +5,6 @@ project(HomeScada VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories(include)
-
 # Находим библиотеку
 find_package(nlohmann_json REQUIRED)
 
@@ -25,6 +23,12 @@ add_executable(home-scada
     src/Archive.cpp
     tests/tester.cpp
     tests/testSource.cpp
+)
+
+target_include_directories(home-scada PUBLIC
+    include
+    src
+    tests
 )
 
 # Добавляем cpp-файлы из src/
