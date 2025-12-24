@@ -26,14 +26,6 @@ void Archive::appendArchive(const std::string &Id, const std::string &nameSensor
 
     auto now = std::chrono::system_clock::now();
     auto t = std::chrono::system_clock::to_time_t(now);
-
-    /*file_
-        << "[" << std::put_time(std::localtime(&t), "%Y-%m-%d %H:%M:%S") << "] "
-        << "[" << Id << "] "
-        << "[" <<  nameSensor << "]" << " -> "
-        << "[ state ]" << StateToString(state)
-        << " | value=" << value << std::endl;
-    */
     file_ 
         << t << ';'
         << Id << ';'

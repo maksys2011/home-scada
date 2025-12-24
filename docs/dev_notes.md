@@ -64,4 +64,9 @@ Logger / Archive
 - Архив не фильтрует события по состояниям (OK / WARN / ALARM), а хранит историю значений
 - Фильтрация значений выполняется на уровне SensorState (deadband)
 
+Archive:
+- writes every accepted sensor value
+- independent from state transitions
+
+
 

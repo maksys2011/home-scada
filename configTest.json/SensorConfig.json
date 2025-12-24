@@ -2,11 +2,11 @@
     "id_": "temp01",
     "name_": "Temperature Sensor",
     "type_": "Analog",
-    "warnHigh_": 90.0,
-    "warnLow_": 10.0,
+    "warnHigh_": 50.5,
+    "warnLow_": 49.5,
     "alarmHigh_": 95.0,
     "alarmLow_": 5.0,
-    "deadband_" : 0.3,
-    "hysteresis_" : 2.0
+    "deadband_" : 0.1,
+    "hysteresis_" : 0.2
 }
 

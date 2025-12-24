@@ -16,16 +16,14 @@ SensorState::SensorState(const SensorConfig &config, Logger* logger, Archive* ar
 {}
 void SensorState::processValue(double raw)
 {
-    if(lastValue_.has_value()){
+    bool isFirst = !lastValue_.has_value();
+
+    if(!isFirst){
         double diff = std::abs(raw - lastValue_.value());
         if(diff < config_.deadband()){
             return;
         }
     }
-    lastValue_ = raw;
-    State newState = classify(raw);
-
-    if(newState == State::INVALID) return;
 
     if(arch_){
         arch_->appendArchive(
@@ -35,6 +33,15 @@ void SensorState::processValue(double raw)
             currentState
         );
     }
+    
+    lastValue_ = raw;
+    State newState = classify(raw);
+
+    if(newState == State::INVALID) {
+        return;}
+
+    
+
     // Как это работает (на примере температуры):
 
     /*Заданная температура (Уставка): Например, 25°C.
@@ -61,7 +68,6 @@ void SensorState::processValue(double raw)
     if (newState == currentState) {
         pendingState = currentState;
         debounceCounter = 0;
-        return;
     }
 
     if (pendingState != newState) {
@@ -71,7 +77,6 @@ void SensorState::processValue(double raw)
     }
 
     debounceCounter++;
-
     if (debounceCounter < debounceLimit) {
         return;
     }
@@ -89,6 +94,7 @@ void SensorState::processValue(double raw)
             raw
         );
     }
+    
 }
 State SensorState::status() const
 {

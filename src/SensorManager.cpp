@@ -1,5 +1,6 @@
 #include "SensorManager.hpp"
 #include "Sensor.hpp"
+#include <iostream>
 
 bool SensorManager::addSensor(const std::string &id, Sensor *sensor)
 {

@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "SmoothRandomSource.hpp"
 
 SmothRandomSource::SmothRandomSource(double startValue,
@@ -10,7 +11,26 @@ SmothRandomSource::SmothRandomSource(double startValue,
             max_(maxValue),
             gen_(std::random_device{}()),
             dist_(-deltaValue, deltaValue) 
-{}
+
+{
+    if(min_ > max_) {
+        throw std::logic_error(
+            "SmoothRandomSource: minValue > maxValue"
+        );
+    }
+
+    if(current_ < min_ || current_ > max_){
+        throw std::logic_error(
+            "SmoothRandomSource: startValue out of range"
+        );
+    }
+
+    if (delta_ <= 0) {   
+        throw std::logic_error(
+            "SmoothRandomSource: deltaValue must be > 0"
+        );
+    }
+}
 
 double SmothRandomSource::readValue()
 {

@@ -17,9 +17,12 @@ void Sensor::updateValue(double rawValue)
 }
 void Sensor::update()
 {
-    if(source_) return;
+    if(!source_) return;
 
     double value = source_->readValue();
+
+    std::cout << "val: " << value << std::endl;
+
     state_.processValue(value);
 
 }
