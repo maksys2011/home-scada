@@ -34,3 +34,5 @@ ActuatorType ParseActuatorType(const std::string &typeStr);
 std::string ActuatorTypeToString(ActuatorType type);
 
 std::string StateToString(State state);
+
+State ParseState(std::string const str);

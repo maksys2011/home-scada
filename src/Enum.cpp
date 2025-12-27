@@ -74,3 +74,11 @@ std::string StateToString(State state) {
         return std::string();
 }
 
+State ParseState(const std::string str) {
+    if(str == "OK") return State::OK;
+    else if(str == "WARN") return State::WARN;
+    else if(str == "ALARM") return State::ALARM;
+    else if(str == "INVALID") return State::INVALID;
+    else return State();
+}
+

@@ -14,6 +14,7 @@
 #include "SensorManager.hpp"
 #include "SmoothRandomSource.hpp"
 #include "testSource.hpp"
+#include "ArchiveReader.hpp"
 
 using json = nlohmann::json;
 
@@ -33,10 +34,14 @@ int main() {
     for(size_t i = 0; i < 10; i++){
         manager.tick();
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        std::cout << i << std::endl;
     }
     std::cout << "<< STOP >>" << std::endl;
 
+    const std::string arch_path = "/home/maksys2011/home-scada/archive/archive.csv";
+    ArchiveReader r(arch_path);
+    auto records = r.readAll();
+    std::cout << records.size() << std::endl;
 
+    
     return 0;
 }

@@ -23,6 +23,7 @@ add_executable(home-scada
     src/Archive.cpp
     tests/tester.cpp
     tests/testSource.cpp
+    src/ArchiveReader.cpp
 )
 
 target_include_directories(home-scada PUBLIC
