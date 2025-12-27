@@ -41,8 +41,9 @@ int main() {
     const std::string arch_path = "/home/maksys2011/home-scada/archive/archive.csv";
     ArchiveReader r(arch_path);
 
+    const std::string& file = "/home/maksys2011/home-scada/archive/arch.txt";
     auto records = r.readAll();
-    ArchiveRepotr::printSummary(records);
+    ArchiveReport::writeSummaryToFile(records, file);
 
     
     return 0;

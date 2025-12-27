@@ -4,6 +4,7 @@
 #include <ctime>
 #include <sstream>
 #include <iomanip>
+#include <fstream>
 #include "ArchiveReport.hpp"
 
 
@@ -18,52 +19,75 @@ static std::string formatTime(std::time_t ts)
     return oss.str();
 }
 
-void ArchiveRepotr::printSummary(const std::vector<ArchiveRecord> &records)
+static void writeSummary(std::ostream& out, 
+                const std::vector<ArchiveRecord>& records)
 {
-    if(records.empty()) {
-        std::cout << "No data\n";
+    if(records.empty()){
+        out << "Archove is empty \n";
         return;
     }
 
-    std::map<std::string, std::vector<ArchiveRecord>> grouped;
+    const auto& first = records.front();
+    const auto& last = records.back();
 
-    for(const auto& rec : records){
-        grouped[rec.sensorId_].push_back(rec);
+    double min_value = records.front().value_;
+    double max_value = records.front().value_;
+    double sum = 0.0;
+
+    int okCount = 0;
+    int warnCount = 0;
+    int alarmCount = 0;
+
+    for(const auto& it : records){
+        if(it.value_ < min_value) min_value = it.value_;
+        if(it.value_ > max_value) max_value = it.value_;
+
+        sum += it.value_;
+
+        if(it.state_ == State::OK) okCount++;
+        else if(it.state_ == State::WARN) warnCount++;
+        else if(it.state_ == State::ALARM) alarmCount++;
+
     }
 
-    for(const auto& [sensorId, list] : grouped){
-        
-        const std::string& name = list.front().sensorName_;
+    double average = sum / records.size();
 
-        double min_value = list.front().value_;
-        double max_value = list.front().value_;
-        double sum = 0.0;
+    out << "============================================\n";
+    out << "Sensor Id     : " << first.sensorId_ << "\n";
+    out << "Sensor Name   : " << first.sensorName_ << "\n";
 
-        std::time_t firstTs = list.front().timestamp_;
-        std::time_t lastTs = list.front().timestamp_;
+    out << "Records       : " << records.size() << "\n";
+    out << "Min value     : " << min_value << "\n";
+    out << "Max value     : " << max_value << "\n";
+    out << "Average       : " << average << "\n";
 
-        for(auto& it : list){
-            sum += it.value_;
+    out << "States        : \n";
+    out << " OK    : " << okCount << "\n";
+    out << " WARN  : " << warnCount << "\n";
+    out << " ALARM : " << alarmCount << "\n";
 
-            if(it.value_ < min_value) min_value = it.value_;
-            if(it.value_ > max_value) max_value = it.value_;
+    out << "Last value    : " << last.value_ << " " << StateToString(last.state_) << " \n";
+    
+    out << "Period : \n";
+    out << "Beginnig : " << formatTime(first.timestamp_) << "\n";
+    out << "End      : " << formatTime(last.timestamp_) << "\n";
+    out << "============================================\n";
+}
 
-            if(it.timestamp_ < firstTs) firstTs = it.timestamp_;
-            if(it.timestamp_ > lastTs) lastTs = it.timestamp_;
-        }
+void ArchiveReport::printSummary(const std::vector<ArchiveRecord> &records)
+{
+    writeSummary(std::cout, records);  
+}
 
-        double avg = sum / records.size();
+void ArchiveReport::writeSummaryToFile(const std::vector<ArchiveRecord> &records, const std::string& filePath)
+{
+    std::ofstream file(filePath);
 
-        std::cout <<"================================================\n";
-        std::cout <<"Sensor Id   : " << sensorId << "\n";
-        std::cout <<"Sensor Name : " << name << "\n\n";
-        std::cout <<"Records     : " << records.size() << "\n";
-        std::cout <<"Min value   : " << min_value << "\n";
-        std::cout <<"Max value   : " << max_value << "\n";
-        std::cout <<"Average     : " << avg << "\n\n";
-        std::cout <<"Period      : " << "\n" << 
-                      "     Beginning   : " << formatTime(firstTs) << "\n" 
-                    <<"     End         : " << formatTime(lastTs) << "\n";
-        std::cout <<"================================================\n";
+    if(!file.is_open()){
+        std::cerr << "Failed to open report file: " << filePath << "\n";
+        return;
     }
+
+    writeSummary(file, records);
+
 }
