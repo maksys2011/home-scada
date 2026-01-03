@@ -2,9 +2,14 @@
 
 testSource::testSource(std::vector<double> &val)
 {
+    values_ = val;
 }
 
 double testSource::readValue()
 {
-    return 0.0;
+    if(index_ < values_.size()){
+        return values_[index_++];
+    }else{ 
+        return values_.back(); 
+    }
 }

@@ -1,8 +1,8 @@
 #pragma once
 
-class Source {
+class Source 
+{
 public:
-
     virtual ~Source() = default;
     virtual double readValue() = 0;
 };

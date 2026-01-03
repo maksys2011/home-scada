@@ -1,6 +1,6 @@
 {
         "id" : "45001",
-        "name" : "Сurtain drive",
+        "name" : "Heater Actuator",
         "type" : "AnalogOut",
         "minValue" : 0.0,
         "maxValue" : 100.0

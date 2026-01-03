@@ -17,6 +17,9 @@
 #include "ArchiveReader.hpp"
 #include "ArchiveReport.hpp"
 #include "RuleThermostatConfig.hpp"
+#include "RuleEngine.hpp"
+#include "RuleThermostat.hpp"
+
 
 using json = nlohmann::json;
 
@@ -30,9 +33,7 @@ int main() {
     const std::string& fileCfgActuator = "/home/maksys2011/home-scada/configTest.json/ActuatorConfig.json";
     const std::string& fileCfgRuleThermostat = "/home/maksys2011/home-scada/configTest.json/RuleThermostat.json";
 
-    RuleThermostatConfig cfgT;
-    cfgT.fromJson(fileCfgRuleThermostat);
-    cfgT.print();
+    
 
 
 
