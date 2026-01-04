@@ -7,12 +7,14 @@ Actuator::Actuator(ActuatorConfig config):
             {}
 void Actuator::turnOn()
 {
+    if(state_) return;
     state_ = true;
     std::cout << "ON" << std::endl;
 }
 
 void Actuator::turnOff()
 {
+    if(!state_) return;
     state_ = false;
     std::cout << "OFF" << std::endl;
 }

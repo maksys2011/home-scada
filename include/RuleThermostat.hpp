@@ -11,13 +11,13 @@ class RuleThermostat : public Rule
 public:
     RuleThermostat(
         SensorState& sensor,
-        Actuator& actuator,
-        const RuleThermostatConfig& ruleCfg);
+        Actuator* actuator,
+        RuleThermostatConfig& ruleCfg);
 
         void evaluate() override;
 
 private:
     SensorState& sensor_;
-    Actuator& actuator_;
+    Actuator* actuator_;
     const RuleThermostatConfig& ruleCfg_;
 };

@@ -13,3 +13,8 @@ double testSource::readValue()
         return values_.back(); 
     }
 }
+
+std::vector<double> testSource::getValues()
+{
+    return values_;
+}

@@ -17,7 +17,6 @@ SensorState::SensorState(const SensorConfig &config, Logger* logger, Archive* ar
 void SensorState::processValue(double raw)
 {
     bool isFirst = !lastValue_.has_value();
-
     if(!isFirst){
         double diff = std::abs(raw - lastValue_.value());
         if(diff < config_.deadband()){
@@ -33,14 +32,12 @@ void SensorState::processValue(double raw)
             currentState
         );
     }
-    
+
     lastValue_ = raw;
     State newState = classify(raw);
 
     if(newState == State::INVALID) {
         return;}
-
-    
 
     // Как это работает (на примере температуры):
 

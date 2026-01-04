@@ -27,6 +27,7 @@ add_executable(home-scada
     src/ArchiveReport.cpp
     src/RuleThermostatConfig.cpp
     src/RuleEngine.cpp
+    src/App.cpp
 )
 
 target_include_directories(home-scada PUBLIC

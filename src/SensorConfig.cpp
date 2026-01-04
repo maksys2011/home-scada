@@ -54,10 +54,10 @@ bool SensorConfig::validate() const
 
 bool SensorConfig::validateValue(double v) const
 {
-    if (!validate()) {
+    /*if (!validate()) {
         std::cout << "validate - false" << std::endl;
         return false;
-    }
+    }*/
     return  std::isfinite(v);
 }
 
